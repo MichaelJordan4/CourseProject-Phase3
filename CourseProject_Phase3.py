@@ -123,10 +123,3 @@ if __name__ == "__main__":
         EmpFile.write(EmpDetail)
     EmpFile.close()
     printinfo(DetailsPrinted)
-
-
-
-####################################################################
-
-
-
