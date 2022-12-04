@@ -1,14 +1,16 @@
 # Michael Jordan
 # CIS 261
-#
+# Course Project Phase 3
 # write the line of code to import the datetime library (Hint: look at week 1 labs)
+
+from datetime import datetime
 
 def GetEmpName():
     empname = input("Enter employee name: ")
     return empname
 def GetDatesWorked():
-    fromdate = input("Enter Start Date (mm/dd/yyyy: ")
-    todate = input("Enter End Date (mm/dd/yyyy: ")
+    fromdate = input("Enter Start Date (mm/dd/yyyy): ")
+    todate = input("Enter End Date (mm/dd/yyyy): ")
     return fromdate, todate
 def GetHoursWorked():
     hours = float(input('Enter amount of hours worked:  '))
@@ -33,7 +35,7 @@ def printinfo(DetailsPrinted):
     TotNetPay = 0.00
 ###################################################################
     # write the line of code to open Employees.txt file in read mode and assign to EmpFile
-
+    EmpFile = open("Employees.txt","r")
     while True:
         rundate = input ("Enter start date for report (MM/DD/YYYY) or All for all data in file: ")
         if (rundate.upper() == "ALL"):
@@ -47,13 +49,13 @@ def printinfo(DetailsPrinted):
             continue  # skip next if statement and re-start loop
     while True:
         # write the line of code to read a record from EmpFile and assign it to EmpDetail
-
+        EmpDetail = EmpFile.readline()
         if not EmpDetail:
             break
         #write the line of code to remove the carriage return from the end of the record read from the file
-
+        EmpDetail = EmpDetail.replace("\n", "")
         #write the line of code to split the record read in on the pipe delimiter and assign it to EmpList
-
+        EmpList = EmpDetail.split("|")
         fromdate = EmpList[0]
         if (str(rundate).upper() != "ALL"):
             checkdate = datetime.strptime(fromdate, "%m/%d/%Y")
@@ -95,7 +97,7 @@ def PrintTotals(EmpTotals):
 
 if __name__ == "__main__":
     # write the line of code to open a file Employees.txt in append mode and assign it to EmpFile
-
+    EmpFile = open("Employees.txt", "a+")
     #EmpDetailList = []
     EmpTotals = {}
     DetailsPrinted = False
@@ -110,11 +112,11 @@ if __name__ == "__main__":
         ##############################################################
         # write the line of code that will concatenate fromdate, todate, empname, hours, hourlyrate, and taxrate. Pipe delimit each value and add a carriage return to the end of the line
         # and assign the line to EmpDetail
- 
+        EmpDetail = fromdate + "|" + todate  + "|" + empname  + "|" + str(hours)  + "|" + str(hourlyrate)  + "|" + str(taxrate) + "\n" 
         # write the liie of code that will write EmpDetail to EmpFile
-    
+        EmpFile.write(EmpDetail)
     # write the line of code to close EmpFile
-
+    EmpFile.close()
     printinfo(DetailsPrinted)
 
 
